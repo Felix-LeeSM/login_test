@@ -261,6 +261,7 @@ export class SocialLoginService {
       return {
         success: true,
         data: {
+          LoginType,
           userInfo: targetUser,
           authorization: `Bearer ${accessToken}`,
           refreshToken: `Bearer ${refreshToken}`,
