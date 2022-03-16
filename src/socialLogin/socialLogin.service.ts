@@ -284,6 +284,7 @@ export class SocialLoginService {
     accessTokenBearer: string,
     body: CompleteFirstLoginDTO,
   ) {
+    const userQuery = this.userRepository.createQueryBuilder('users');
     if (typeof accessTokenBearer !== 'string') {
       throw new HttpException('Access Token Required', HttpStatus.FORBIDDEN);
     }
@@ -317,15 +318,10 @@ export class SocialLoginService {
     }
     mySet.refreshToken = refreshToken;
 
-    console.log('너냐 ?');
-
-    const existUser = await this.userRepository
-      .createQueryBuilder()
-      .select(['userId', 'profileImgUrl', 'activityPoint', 'nickname'])
+    const existUser = await userQuery
+      .select(requiredColumns)
       .where('nickname = :nickname', { nickname: mySet.nickname })
       .getOne();
-
-    console.log('아니 이거 또 왜 안돼 쓰레기같네');
 
     if (existUser) {
       throw new HttpException(
@@ -347,8 +343,7 @@ export class SocialLoginService {
       throw new HttpException('Not Valid Request', HttpStatus.BAD_REQUEST);
     }
 
-    const userInfo = await this.userRepository
-      .createQueryBuilder()
+    const userInfo = await userQuery
       .select(requiredColumns)
       .where('userId = :userId', { userId: mySet.userId })
       .getOne();
