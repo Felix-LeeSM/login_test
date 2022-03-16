@@ -272,7 +272,7 @@ export class SocialLoginService {
     return {
       success: true,
       data: {
-        userInfo: targetUser,
+        userInfo: null,
         authorization: `Bearer ${accessToken}`,
       },
     };
