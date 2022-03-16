@@ -137,6 +137,7 @@ export class SocialLoginService {
     idToken?: string,
   ) {
     const container = this.hash;
+    let indigenousKey: string;
     let userInfo: AxiosResponse<any, any>;
 
     try {
@@ -150,8 +151,9 @@ export class SocialLoginService {
             },
           });
           container.update(String(userInfo.data.id));
-
+          indigenousKey = String(userInfo.data.id);
           break;
+
         case LoginType.google:
           userInfo = await axios({
             method: 'GET',
@@ -164,7 +166,9 @@ export class SocialLoginService {
             },
           });
           container.update(String(userInfo.data.sub));
+          indigenousKey = String(userInfo.data.sub);
           break;
+
         case LoginType.github:
           userInfo = await axios({
             method: 'GET',
@@ -176,7 +180,9 @@ export class SocialLoginService {
             },
           });
           container.update(String(userInfo.data.id));
+          indigenousKey = String(userInfo.data.id);
           break;
+
         default:
           throw new HttpException(
             'error: Bad Request, errorDescription: Requested Social Login site Not Yet Ready.',
@@ -189,7 +195,7 @@ export class SocialLoginService {
         HttpStatus.INTERNAL_SERVER_ERROR,
       );
     }
-    const indigenousKey = container.digest('hex');
+    // const indigenousKey = container.digest('hex');
     return this.internalTokenCreation(indigenousKey, loginType, res);
   }
 
