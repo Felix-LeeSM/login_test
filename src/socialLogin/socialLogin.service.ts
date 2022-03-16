@@ -274,6 +274,7 @@ export class SocialLoginService {
       data: {
         userInfo: null,
         authorization: `Bearer ${accessToken}`,
+        LoginType,
       },
     };
   }
@@ -355,7 +356,6 @@ export class SocialLoginService {
       userInfo: userInfo,
       authorization: `Bearer ${accessToken}`,
       refreshToken: `Bearer ${refreshToken}`,
-      LoginType,
     };
   }
 }
