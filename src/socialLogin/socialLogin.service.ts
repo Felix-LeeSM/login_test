@@ -315,12 +315,15 @@ export class SocialLoginService {
     }
     mySet.refreshToken = refreshToken;
 
+    console.log('너냐 ?');
+
     const existUser = await this.userRepository
       .createQueryBuilder()
       .select(requiredColumns)
-      .where('userId = :userId', { userId })
-      .orWhere('nickname = :nickname', { nickname: mySet.nickname })
+      .where('nickname = :nickname', { nickname: mySet.nickname })
       .getOne();
+
+    console.log('아니 이거 또 왜 안돼 쓰레기같네');
 
     if (existUser) {
       throw new HttpException(
