@@ -37,3 +37,5 @@ lerna-debug.log*
 .env
 docker.env
 src/auth/jwt/jwt.secret.ts
+
+test.txt
