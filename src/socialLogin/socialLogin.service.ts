@@ -352,6 +352,7 @@ export class SocialLoginService {
       userInfo: userInfo,
       authorization: `Bearer ${accessToken}`,
       refreshToken: `Bearer ${refreshToken}`,
+      LoginType,
     };
   }
 }
