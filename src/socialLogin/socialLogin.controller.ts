@@ -12,7 +12,7 @@ import {
   Res,
   UseGuards,
 } from '@nestjs/common';
-import { Response } from 'express';
+import { Request, Response } from 'express';
 
 @Controller('login')
 export class SocialLoginController {
@@ -42,7 +42,7 @@ export class SocialLoginController {
     @Headers('refreshToken') refreshTokenBearer: string,
     @Req() req,
   ) {
-    console.log(req);
+    console.log(req.canIGetIt);
     return this.socialLoginService.userValidation(
       accessTokenBearer,
       refreshTokenBearer,

@@ -15,6 +15,7 @@ export class LocalAuthGuard implements CanActivate {
       '-------------------------------------------------------------',
     );
     console.log('thisOne', thisOne);
+    req.canIGetIt = true;
     return true;
   }
 }
