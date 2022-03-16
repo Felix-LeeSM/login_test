@@ -13,6 +13,7 @@ import {
   MY_SECRET_KEY,
   ACCESS_TOKEN_DURATION,
   REFRESH_TOKEN_DURATION,
+  requiredColumns,
 } from './jwt/jwt.secret';
 import * as jwt from 'jsonwebtoken';
 
@@ -27,7 +28,7 @@ export class AuthService {
   async findUserByUserId(userId: string): Promise<Users | undefined> {
     return await this.userRepository
       .createQueryBuilder()
-      .select('users')
+      .select(requiredColumns)
       .where('userId = :userId', { userId })
       .getOne();
   }
@@ -38,7 +39,7 @@ export class AuthService {
   ): Promise<Users | undefined> {
     return await this.userRepository
       .createQueryBuilder()
-      .select('users')
+      .select(requiredColumns)
       .where('userId = :userId', { userId })
       .andWhere('refreshToken = :refreshToken', { refreshToken })
       .getOne();

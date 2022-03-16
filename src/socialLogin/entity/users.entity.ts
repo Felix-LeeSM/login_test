@@ -1,8 +1,14 @@
-import { Column, CreateDateColumn, Entity, UpdateDateColumn } from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 
 @Entity('users')
 export class Users {
-  @Column('varchar', { primary: true, name: 'userId', length: 100 })
+  @PrimaryGeneratedColumn('uuid', { name: 'userId' })
   userId: string;
 
   @Column('varchar', { name: 'nickname', length: 30, default: '' })

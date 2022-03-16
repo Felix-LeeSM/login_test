@@ -1,3 +1,4 @@
+import { LocalAuthGuard } from './../auth/auth.guard';
 import { CompleteFirstLoginDTO } from './dto/completeFirstLogin.dto';
 import { SocialLoginService } from './socialLogin.service';
 import {
@@ -5,12 +6,11 @@ import {
   Controller,
   Get,
   Headers,
-  HttpException,
-  HttpStatus,
   Post,
   Query,
   Req,
   Res,
+  UseGuards,
 } from '@nestjs/common';
 import { Response } from 'express';
 
@@ -35,6 +35,7 @@ export class SocialLoginController {
     return this.socialLoginService.getGithubToken(code, res);
   }
 
+  @UseGuards(LocalAuthGuard)
   @Get('validation')
   userValidation(
     @Headers('authorization') accessTokenBearer: string,
